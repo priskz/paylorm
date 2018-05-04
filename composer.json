@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "priskz/payload": "~0.0.1",
+        "priskz/payload": "~0.1.0",
         "php": ">=5.4.0"
     },
     "autoload": {
