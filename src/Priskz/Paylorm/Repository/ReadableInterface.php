@@ -1,4 +1,6 @@
-<?php namespace Priskz\Paylorm\Repository;
+<?php
+
+namespace Priskz\Paylorm\Repository;
 
 /**
  * A repository is an object containing operations for one or more

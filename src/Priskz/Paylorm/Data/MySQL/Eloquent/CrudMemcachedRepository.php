@@ -1,4 +1,6 @@
-<?php namespace Priskz\Paylorm\Data\MySQL\Eloquent;
+<?php
+
+namespace Priskz\Paylorm\Data\MySQL\Eloquent;
 
 use Cache;
 use Illuminate\Database\Eloquent\Collection;

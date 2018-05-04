@@ -1,4 +1,6 @@
-<?php namespace Priskz\Paylorm\Repository;
+<?php
+
+namespace Priskz\Paylorm\Repository;
 
 interface SearchableInterface
 {

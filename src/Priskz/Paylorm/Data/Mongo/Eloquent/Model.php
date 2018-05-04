@@ -1,4 +1,6 @@
-<?php namespace Priskz\Paylorm\Data\Mongo\Eloquent;
+<?php
+
+namespace Priskz\Paylorm\Data\Mongo\Eloquent;
 
 use Jenssegers\Mongodb\Eloquent\Model as MongoModel;
 

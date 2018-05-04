@@ -1,4 +1,6 @@
-<?php namespace Priskz\Paylorm\Model;
+<?php
+
+namespace Priskz\Paylorm\Model;
 
 interface SoftDeleteableInterface
 {

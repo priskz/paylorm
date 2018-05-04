@@ -1,4 +1,6 @@
-<?php namespace Priskz\Paylorm\Model;
+<?php
+
+namespace Priskz\Paylorm\Model;
 
 /**
  * A Model is just an object holding on to data for a particular

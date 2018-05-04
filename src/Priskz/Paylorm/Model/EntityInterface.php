@@ -1,4 +1,6 @@
-<?php namespace Priskz\Paylorm\Model;
+<?php
+
+namespace Priskz\Paylorm\Model;
 
 /**
  * A Model can also be used as an "entity" in a nosql data storage format.

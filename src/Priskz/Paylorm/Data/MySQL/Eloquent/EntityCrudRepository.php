@@ -1,4 +1,6 @@
-<?php namespace Priskz\Paylorm\Data\MySQL\Eloquent;
+<?php
+
+namespace Priskz\Paylorm\Data\MySQL\Eloquent;
 
 use Priskz\Payload\Payload;
 use Priskz\Paylorm\Repository\CrudInterface;

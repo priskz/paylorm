@@ -1,4 +1,6 @@
-<?php namespace Priskz\Paylorm\Data\MySQL\Eloquent;
+<?php
+
+namespace Priskz\Paylorm\Data\MySQL\Eloquent;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;

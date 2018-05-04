@@ -1,4 +1,6 @@
-<?php namespace Priskz\Paylorm\Data\Mongo\Laravel;
+<?php
+
+namespace Priskz\Paylorm\Data\Mongo\Laravel;
 
 use Jenssegers\Mongodb\Connection;
 use Jenssegers\Mongodb\MongodbServiceProvider;
