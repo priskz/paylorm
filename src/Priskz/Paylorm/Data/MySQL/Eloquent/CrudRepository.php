@@ -138,7 +138,7 @@ class CrudRepository implements CrudInterface
 				'meta'  => [
 					'page'         => key($parameter[self::PAGINATION_KEY]),
 					'num_per_page' => reset($parameter[self::PAGINATION_KEY]),
-					'total_count'  => $this->getTotal()
+					'total_count'  => $query->count()
 				]
 			];
 
