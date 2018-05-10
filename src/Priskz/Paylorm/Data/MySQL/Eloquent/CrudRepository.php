@@ -12,8 +12,10 @@ class CrudRepository implements CrudInterface
 	 */
 	const ORDER_KEY      = 'order';
 	const FILTER_KEY     = 'filter';
-	const PAGINATION_KEY = 'pagination';
 	const EMBED_KEY      = 'embed';
+	const PAGINATION_KEY = 'pagination';
+	const PAGE_KEY       = 'page';
+	const PER_KEY        = 'per';
 
 	/**
 	 * Common / Default Get Parameter(s)
@@ -136,17 +138,17 @@ class CrudRepository implements CrudInterface
 			$result = [
 				'items' => null,
 				'meta'  => [
-					'page'         => key($parameter[self::PAGINATION_KEY]),
-					'num_per_page' => reset($parameter[self::PAGINATION_KEY]),
-					'total_count'  => $query->count()
+					'page'        => key($parameter[self::PAGINATION_KEY]),
+					'per'         => reset($parameter[self::PAGINATION_KEY]),
+					'total_count' => $query->count()
 				]
 			];
 
 			// Calculate total pages.
-			$result['meta']['total_pages'] = ceil($result['meta']['total_count'] / $result['meta']['num_per_page']);
+			$result['meta']['total_pages'] = ceil($result['meta']['total_count'] / $result['meta']['per']);
 
 			// Add pagination specific query constraints.
-			$query = $query->skip($result['meta']['page' ])->take($result['meta']['num_per_page']);
+			$query = $query->skip($result['meta']['page' ])->take($result['meta']['per']);
 
 			// Finally, run the query.
 			$result['items'] = $this->retrieve($query);
