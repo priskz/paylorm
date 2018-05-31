@@ -159,6 +159,82 @@ class CrudRepository implements CrudInterface
 
 		// Run the query.
 		$result = $this->retrieve($query);
+		
+		// Determine what to return based on count.
+		switch($result->count())
+		{
+			case 0:
+				return new Payload($result, 'not_found');
+			break;
+
+			default:
+				return new Payload($result, 'found');
+			break;
+		}
+	}
+
+	/**
+	 * Get a single object based on given parameters.
+	 *
+	 * @param  array  $parameter
+	 * @return Payload
+	 */
+	public function first(array $parameter = [])
+	{
+		// Merge any base/common query parameters with given parameters taking precedence.
+		$parameter = array_merge($this->parameter, $parameter);
+
+		// Begin building query.
+		$query = $this->model;
+
+		// Add filters to the query.
+		if(array_key_exists(self::FILTER_KEY, $parameter))
+		{
+			foreach($parameter[self::FILTER_KEY] as $field => $filter)
+			{
+				// Check if the value is an array, if not treat as a standard where equal clause.
+				if( ! is_array($filter))
+				{
+					$query = $query->where($field, '=', $filter);
+				}
+				else
+				{
+					// If filter array is an array, utilize expected key/values.
+					if(array_key_exists('or', $filter))
+					{
+						if($filter['or'])
+						{
+							$query = $query->orWhere($filter['field'], $filter['operator'], $filter['value']);
+						}
+					}
+					else
+					{
+						$query = $query->where($filter['field'], $filter['operator'], $filter['value']);
+					}
+				}
+			}
+		}
+
+		// Add order parameters to the query.
+		if(array_key_exists(self::ORDER_KEY, $parameter))
+		{
+			foreach($parameter[self::ORDER_KEY] as $field => $direction)
+			{
+				$query = $query->orderBy($field, $direction);
+			}
+		}
+
+		// Add relationship joins to query.
+		if(array_key_exists(self::EMBED_KEY, $parameter))
+		{
+			foreach($parameter[self::EMBED_KEY] as $relationship)
+			{
+				$this->eagerLoad($relationship);
+			}
+		}
+
+		// Run the query.
+		$result = $this->retrieve($query);
 
 		// Determine what to return based on count.
 		switch($result->count())
@@ -167,16 +243,12 @@ class CrudRepository implements CrudInterface
 				return new Payload($result, 'not_found');
 			break;
 
-			case 1:
-				return new Payload($result->first(), 'found'); return ;
-			break;
-
 			default:
-				return new Payload($result, 'found');
+				return new Payload($result->first(), 'found');
 			break;
 		}
 	}
-	
+
 	/**
 	 * Create a new Model with the given data.
 	 *
