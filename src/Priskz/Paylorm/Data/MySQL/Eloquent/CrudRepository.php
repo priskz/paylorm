@@ -148,7 +148,7 @@ class CrudRepository implements CrudInterface
 			$result['meta']['total_pages'] = ceil($result['meta']['total_count'] / $result['meta']['per']);
 
 			// Add pagination specific query constraints.
-			$query = $query->skip($result['meta']['page' ])->take($result['meta']['per']);
+			$query = $query->skip(($result['meta']['page' ] * $result['meta']['per']))->take($result['meta']['per']);
 
 			// Finally, run the query.
 			$result['items'] = $this->retrieve($query);
