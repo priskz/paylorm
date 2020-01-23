@@ -10,6 +10,13 @@ use Priskz\Paylorm\Model\DateableInterface;
 class Model extends EloquentModel implements BaseInterface, DateableInterface
 {
     /**
+     * The relations to eager load and embed on every query.
+     *
+     * @var array
+     */
+    protected $embed = [];
+
+    /**
      * Create a new instance.
      *
      * @param  array   $attributes
@@ -20,9 +27,28 @@ class Model extends EloquentModel implements BaseInterface, DateableInterface
     {
         parent::__construct($attributes);
 
+        // Initialization.
+        $this->init($connection);
+    }
+
+    /**
+     * Initialization Logic.
+     *
+     * @param  string  $connection
+     * @return void
+     */
+    protected function init($connection = null)
+    {
+        // Set connection if given.
         if( ! is_null($connection))
         {
             $this->setConnection($connection);
+        }
+
+        // Entity?
+        if($this->entity)
+        {
+            $this->with = array_merge($this->getEmbeddable(), $this->embed);
         }
     }
 
@@ -47,7 +73,7 @@ class Model extends EloquentModel implements BaseInterface, DateableInterface
      * Get this Entity's type.
      *
      * @todo: Refactor optional param away, pick snake or upper case to be universal.
-     * 
+     *
      * @param  bool   $kebabCase
      * @return string
      */

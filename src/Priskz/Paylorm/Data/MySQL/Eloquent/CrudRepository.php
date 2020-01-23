@@ -8,7 +8,7 @@ use Priskz\Paylorm\Repository\CrudInterface;
 class CrudRepository implements CrudInterface
 {
 	/**
-	 * Parameter Key Constants 
+	 * Parameter Key Constants
 	 */
 	const ORDER_KEY      = 'order';
 	const FILTER_KEY     = 'filter';
@@ -131,7 +131,7 @@ class CrudRepository implements CrudInterface
 			}
 		}
 
-		// If pagination is needed, build query, meta data, and 
+		// If pagination is needed, build query, meta data, and
 		if(array_key_exists(self::PAGINATION_KEY, $parameter))
 		{
 			// Gather pagination variables.
@@ -159,7 +159,7 @@ class CrudRepository implements CrudInterface
 
 		// Run the query.
 		$result = $this->retrieve($query);
-		
+
 		// Determine what to return based on count.
 		switch($result->count())
 		{
@@ -450,7 +450,7 @@ class CrudRepository implements CrudInterface
 	}
 
 	/**
-	 * 
+	 *
 	 * Get this Repository's Eager Load property.
 	 *
 	 * @return array
